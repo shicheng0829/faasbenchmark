@@ -2,9 +2,11 @@ package provider
 
 import (
 	"fmt"
+	"github.com/nuweba/faasbenchmark/provider/aliyun"
 	"github.com/nuweba/faasbenchmark/provider/aws"
 	"github.com/nuweba/faasbenchmark/provider/azure"
 	"github.com/nuweba/faasbenchmark/provider/google"
+	"github.com/nuweba/faasbenchmark/provider/tencent"
 	"github.com/nuweba/faasbenchmark/report"
 	"github.com/nuweba/faasbenchmark/stack"
 	"github.com/nuweba/httpbench/engine"
@@ -36,6 +38,8 @@ const (
 	AWS Providers = iota
 	Google
 	Azure
+	Aliyun
+	Tencent
 	ProvidersCount
 )
 
@@ -44,6 +48,8 @@ func (p Providers) String() string {
 		"aws",
 		"google",
 		"azure",
+		"aliyun",
+		"tencent",
 	}[p]
 }
 
@@ -52,6 +58,8 @@ func (p Providers) Description() string {
 		"aws lambda functions",
 		"google cloud functions",
 		"azure functions",
+		"aliyun functions",
+		"tencent cloud function",
 	}[p]
 }
 
@@ -66,6 +74,10 @@ func NewProvider(providerName string) (FaasProvider, error) {
 		faasProvider, err = google.New()
 	case strings.ToLower(Azure.String()):
 		faasProvider, err = azure.New()
+	case strings.ToLower(Aliyun.String()):
+		faasProvider, err = aliyun.New()
+	case strings.ToLower(Tencent.String()):
+		faasProvider, err = tencent.New()
 	default:
 		faasProvider, err = nil, errors.New(fmt.Sprintf("provider not supported: %s", providerName))
 	}
