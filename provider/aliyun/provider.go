@@ -12,6 +12,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"path"
 	"path/filepath"
 	"runtime"
 )
@@ -70,11 +71,15 @@ func (aliyun *Aliyun) buildGFuncInvokeReq(funcName string, projectId string, qPa
 	// http://69d4ed74258e4ce08eac8edf4f44c000-cn-shanghai.alicloudapi.com/index.handler
 	// https://1581223932488159.cn-shanghai.fc.aliyuncs.com/2016-08-15/proxy/aliyuntestservice-dev/testhandler/
 	//projectId = "69d4ed74258e4ce08eac8edf4f44c000"
+	fmt.Println(funcName)
 	funcUrl.Scheme = "https"
 	funcUrl.Host = "1581223932488159.cn-shanghai.fc.aliyuncs.com"
-	funcUrl.Path = "2016-08-15/proxy/aliyuntestservice-dev/testhandler/"
+	//funcUrl.Path = "2016-08-15/proxy/aliyuntestservice-dev/testhandler/"
+	//funcUrl.Path = "2016-08-15/proxy/aliyuntestservice-dev/increasingcpu/"
+	//funcUrl.Path = "2016-08-15/proxy/aliyuntestservice-dev/increasingmem/"
+	funcUrl.Path = "2016-08-15/proxy/aliyuntestservice-dev/"
 	//funcUrl.Host = fmt.Sprintf("%s-%s.alicloudapi.com", projectId, aliyun.region)
-	//funcUrl.Path = path.Join(funcUrl.Path, funcName)
+	funcUrl.Path = path.Join(funcUrl.Path, funcName[6:])
 	//fmt.Println(funcUrl.Path)
 	fmt.Println(funcUrl.String())
 	req, err := http.NewRequest("GET", funcUrl.String(), ioutil.NopCloser(bytes.NewReader(*body)))

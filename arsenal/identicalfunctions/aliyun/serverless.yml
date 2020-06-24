@@ -1,0 +1,79 @@
+# Welcome to Serverless!
+#
+# For full config options, check out the Alibaba Cloud Function Compute
+# plugin docs:
+#    https://github.com/aliyun/serverless-aliyun-function-compute
+#
+# For documentation on Alibaba Cloud Function Compute itself:
+#    https://serverless.aliyun.com
+
+# Update the service name below with your own service name
+
+service: identicalfunctions
+
+provider:
+  name: aliyun
+  runtime: nodejs12
+  credentials: ~/.aliyuncli/credentials # path must be absolute
+  project: faastest
+  stage: dev
+
+plugins:
+  - serverless-aliyun-function-compute
+
+package:
+  exclude:
+    - package-lock.json
+    - .gitignore
+    - .git/**
+
+functions:
+  node12-memory-128-1:
+    name: sleep-node12-128mb-1
+    description: sleep function 128mb
+    handler: index.sleep1
+    memorySize: 128
+    events:
+      - http:
+          path: /sleep1
+          method: get
+
+  node12-memory-128-2:
+    name: sleep-node12-128mb-2
+    description: sleep function 128mb
+    handler: index.sleep2
+    memorySize: 128
+    events:
+      - http:
+          path: /sleep2
+          method: get
+
+  node12-memory-128-3:
+    name: sleep-node12-128mb-3
+    description: sleep function 128mb
+    handler: index.sleep3
+    memorySize: 128
+    events:
+      - http:
+          path: /sleep3
+          method: get
+
+  node12-memory-128-4:
+    name: sleep-node12-128mb-4
+    description: sleep function 128mb
+    handler: index.sleep4
+    memorySize: 128
+    events:
+      - http:
+          path: /sleep4
+          method: get
+
+  node12-memory-128-5:
+    name: sleep-node12-128mb-5
+    description: sleep function 128mb
+    handler: index.sleep5
+    memorySize: 128
+    events:
+      - http:
+          path: /sleep5
+          method: get
