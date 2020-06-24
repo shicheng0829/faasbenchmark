@@ -26,13 +26,15 @@ RUN wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor 
 	chown root:root /etc/apt/sources.list.d/microsoft-prod.list
 
 RUN npm install -g serverless azure-functions-core-tools@3
-RUN npm install -g serverless-aliyun-function-compute
-RUN npm install serverless-tencent-scf
+RUN npm install serverless-aliyun-function-compute
+#RUN npm install serverless-tencent-scf
 RUN apt-get update && apt-get install azure-cli openjdk-8-jdk maven dotnet-sdk-3.1 -y --fix-missing
 RUN apt-get update && apt-get install libsecret-1-dev -y
 RUN mkdir /app
 
 COPY --from=builder /app/ /app
+RUN mkdir ~/.aliyuncli
+RUN cp /app/ccredentials ~/.aliyuncli
 WORKDIR /app
 RUN npm install
 
