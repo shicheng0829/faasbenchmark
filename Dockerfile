@@ -2,7 +2,9 @@ FROM golang:1.12.17 as builder
 
 RUN mkdir /app 
 ADD . /app/
-WORKDIR /app 
+WORKDIR /app
+ENV GOPROXY="https://goproxy.io"
+ENV GO111MODULE=on
 RUN go build -o faasbenchmark main.go
 RUN go build -o faasbenchmark-tui tui.go
 
@@ -24,7 +26,10 @@ RUN wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor 
 	chown root:root /etc/apt/sources.list.d/microsoft-prod.list
 
 RUN npm install -g serverless azure-functions-core-tools@3
+RUN npm install -g serverless-aliyun-function-compute
+RUN npm install serverless-tencent-scf
 RUN apt-get update && apt-get install azure-cli openjdk-8-jdk maven dotnet-sdk-3.1 -y --fix-missing
+RUN apt-get update && apt-get install libsecret-1-dev -y
 RUN mkdir /app
 
 COPY --from=builder /app/ /app
