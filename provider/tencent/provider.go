@@ -74,7 +74,7 @@ func (tencent *Tencent) buildGFuncInvokeReq(funcName string, projectId string, q
 	//funcUrl.Host = "service-7t1pqv44-1256474564.gz.apigw.tencentcs.com"
 	//funcUrl.Path = "release/memstress-dev-memstress4"
 	//funcUrl.Path = "release/sleepfunc-dev-sleep"
-	funcUrl.Host = "service-88noweis-1256474564.gz.apigw.tencentcs.com/"
+	funcUrl.Host = "service-88noweis-1256474564.gz.apigw.tencentcs.com"
 	//funcUrl.Host = fmt.Sprintf("%s-%s.alicloudapi.com", projectId, aliyun.region)
 	//funcUrl.Path = path.Join(funcUrl.Path, funcName)
 	funcUrl.Path = funcName[6:] + "/"
