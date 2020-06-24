@@ -68,11 +68,16 @@ func (tencent *Tencent) buildGFuncInvokeReq(funcName string, projectId string, q
 	// https://YOUR_REGION-YOUR_PROJECT_ID.cloudfunctions.net/FUNCTION_NAME?sleep={time}
 	// https://service-keypade6-1256474564.gz.apigw.tencentcs.com/release/?sleep=500
 	//fmt.Println("projectID:",projectId)
+	//https://service-34fsrgdc-1256474564.gz.apigw.tencentcs.com/release/memstress-dev-memstress4
 	funcUrl.Scheme = "https"
-	funcUrl.Host = "service-mi2qiopa-1256474564.gz.apigw.tencentcs.com"
-	funcUrl.Path = "release/"
+	//funcUrl.Host = "service-34fsrgdc-1256474564.gz.apigw.tencentcs.com"
+	//funcUrl.Host = "service-7t1pqv44-1256474564.gz.apigw.tencentcs.com"
+	//funcUrl.Path = "release/memstress-dev-memstress4"
+	//funcUrl.Path = "release/sleepfunc-dev-sleep"
+	funcUrl.Host = "http://service-88noweis-1256474564.gz.apigw.tencentcs.com/"
 	//funcUrl.Host = fmt.Sprintf("%s-%s.alicloudapi.com", projectId, aliyun.region)
 	//funcUrl.Path = path.Join(funcUrl.Path, funcName)
+	funcUrl.Path = funcName[6:] + "/"
 	//fmt.Println(funcUrl.Path)
 	//fmt.Println(funcUrl.String())
 	req, err := http.NewRequest("GET", funcUrl.String(), ioutil.NopCloser(bytes.NewReader(*body)))

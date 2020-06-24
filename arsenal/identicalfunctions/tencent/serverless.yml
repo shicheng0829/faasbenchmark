@@ -1,0 +1,97 @@
+service: identicalfunctions
+
+#org: orgDemo
+#app: appDemo
+#stage: dev
+#component: scf
+#name: scfDemo
+provider:
+  name: tencent
+  runtime: Nodejs12.16
+  project: faastest
+  stage: dev
+
+plugins:
+  - serverless-tencent-scf
+
+functions:
+  sleep1:
+    src: ./
+    region: ap-guangzhou
+    handler: index.sleep1
+    events:
+      - apigw:
+          name: sleep1
+          parameters:
+            protocols:
+              - http
+              - https
+            description: The service of Serverless Framework
+            environment: release
+            endpoints:
+              - path: /sleep1
+                method: GET
+  sleep2:
+    src: ./
+    region: ap-guangzhou
+    handler: index.sleep2
+    events:
+      - apigw:
+          name: sleep2
+          parameters:
+            protocols:
+              - http
+              - https
+            description: The service of Serverless Framework
+            environment: release
+            endpoints:
+              - path: /sleep2
+                method: GET
+  sleep3:
+    src: ./
+    region: ap-guangzhou
+    handler: index.sleep3
+    events:
+      - apigw:
+          name: sleep3
+          parameters:
+            protocols:
+              - http
+              - https
+            description: The service of Serverless Framework
+            environment: release
+            endpoints:
+              - path: /sleep3
+                method: GET
+  sleep4:
+    src: ./
+    region: ap-guangzhou
+    handler: index.sleep4
+    events:
+      - apigw:
+          name: sleep4
+          parameters:
+            protocols:
+              - http
+              - https
+            description: The service of Serverless Framework
+            environment: release
+            endpoints:
+              - path: /sleep4
+                method: GET
+  sleep5:
+    src: ./
+    region: ap-guangzhou
+    handler: index.sleep5
+    events:
+      - apigw:
+          name: sleep5
+          parameters:
+            protocols:
+              - http
+              - https
+            description: The service of Serverless Framework
+            environment: release
+            endpoints:
+              - path: /sleep5
+                method: GET
