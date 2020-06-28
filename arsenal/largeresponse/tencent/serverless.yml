@@ -1,0 +1,34 @@
+service: largeresponse
+
+#org: orgDemo
+#app: appDemo
+#stage: dev
+#component: scf
+#name: scfDemo
+provider:
+  name: tencent
+  runtime: Nodejs12.16
+  project: faastest
+  stage: dev
+
+plugins:
+  - serverless-tencent-scf
+
+functions:
+  largeresponse10086:
+    src: ./
+    region: ap-guangzhou
+    handler: index.main_handler
+    memorySize: 512
+    events:
+      - apigw:
+          name: serverless_api
+          parameters:
+            protocols:
+              - http
+              - https
+            description: The service of Serverless Framework
+            environment: release
+            endpoints:
+              - path: /
+                method: GET

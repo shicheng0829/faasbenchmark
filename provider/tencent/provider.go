@@ -69,17 +69,20 @@ func (tencent *Tencent) buildGFuncInvokeReq(funcName string, projectId string, q
 	// https://service-keypade6-1256474564.gz.apigw.tencentcs.com/release/?sleep=500
 	//fmt.Println("projectID:",projectId)
 	//https://service-34fsrgdc-1256474564.gz.apigw.tencentcs.com/release/memstress-dev-memstress4
+	//https://service-3am7yofg-1256474564.gz.apigw.tencentcs.com/release/largeresponse-dev-largeresponse
 	funcUrl.Scheme = "https"
 	//funcUrl.Host = "service-34fsrgdc-1256474564.gz.apigw.tencentcs.com"
 	//funcUrl.Host = "service-7t1pqv44-1256474564.gz.apigw.tencentcs.com"
 	//funcUrl.Path = "release/memstress-dev-memstress4"
 	//funcUrl.Path = "release/sleepfunc-dev-sleep"
-	funcUrl.Host = "service-88noweis-1256474564.gz.apigw.tencentcs.com"
+	//funcUrl.Host = "service-88noweis-1256474564.gz.apigw.tencentcs.com"
 	//funcUrl.Host = fmt.Sprintf("%s-%s.alicloudapi.com", projectId, aliyun.region)
 	//funcUrl.Path = path.Join(funcUrl.Path, funcName)
-	funcUrl.Path = funcName[6:] + "/"
+	//funcUrl.Path = funcName[6:] + "/"
 	//fmt.Println(funcUrl.Path)
 	//fmt.Println(funcUrl.String())
+	funcUrl.Host = "service-3am7yofg-1256474564.gz.apigw.tencentcs.com"
+	funcUrl.Path = "release/largeresponse-dev-largeresponse"
 	req, err := http.NewRequest("GET", funcUrl.String(), ioutil.NopCloser(bytes.NewReader(*body)))
 
 	if err != nil {
