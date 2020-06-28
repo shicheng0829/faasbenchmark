@@ -12,7 +12,6 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
-	"path"
 	"path/filepath"
 	"runtime"
 )
@@ -77,9 +76,10 @@ func (aliyun *Aliyun) buildGFuncInvokeReq(funcName string, projectId string, qPa
 	//funcUrl.Path = "2016-08-15/proxy/aliyuntestservice-dev/testhandler/"
 	//funcUrl.Path = "2016-08-15/proxy/aliyuntestservice-dev/increasingcpu/"
 	//funcUrl.Path = "2016-08-15/proxy/aliyuntestservice-dev/increasingmem/"
-	funcUrl.Path = "2016-08-15/proxy/aliyuntestservice-dev/"
+	funcUrl.Path = "2016-08-15/proxy/aliyuntestservice-dev/large_response/"
 	//funcUrl.Host = fmt.Sprintf("%s-%s.alicloudapi.com", projectId, aliyun.region)
-	funcUrl.Path = path.Join(funcUrl.Path, funcName[6:]+"/")
+	//funcUrl.Path = path.Join(funcUrl.Path, funcName[6:])
+	//funcUrl.Path += "/"
 	//fmt.Println(funcUrl.Path)
 	fmt.Println(funcUrl.String())
 	req, err := http.NewRequest("GET", funcUrl.String(), ioutil.NopCloser(bytes.NewReader(*body)))
