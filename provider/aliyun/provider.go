@@ -77,7 +77,8 @@ func (aliyun *Aliyun) buildGFuncInvokeReq(funcName string, projectId string, qPa
 	//funcUrl.Path = "2016-08-15/proxy/aliyuntestservice-dev/increasingcpu/"
 	//funcUrl.Path = "2016-08-15/proxy/aliyuntestservice-dev/increasingmem/"
 	//funcUrl.Path = "2016-08-15/proxy/aliyuntestservice-dev/large_response/"
-	funcUrl.Path = "2016-08-15/proxy/aliyuntestservice-dev/largecode/"
+	//funcUrl.Path = "2016-08-15/proxy/aliyuntestservice-dev/largecode/"
+	funcUrl.Path = "2016-08-15/proxy/vpc/vpc/"
 	//funcUrl.Host = fmt.Sprintf("%s-%s.alicloudapi.com", projectId, aliyun.region)
 	//funcUrl.Path = path.Join(funcUrl.Path, funcName[6:])
 	//funcUrl.Path += "/"
