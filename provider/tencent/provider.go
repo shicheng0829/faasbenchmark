@@ -85,8 +85,10 @@ func (tencent *Tencent) buildGFuncInvokeReq(funcName string, projectId string, q
 	//funcUrl.Path = "release/largeresponse-dev-largeresponse"
 	//funcUrl.Host = "service-8fzsuuln-1256474564.sh.apigw.tencentcs.com"
 	//funcUrl.Path = "sleep"
-	funcUrl.Host = "service-5lyxjwvb-1256474564.sh.apigw.tencentcs.com"
-	funcUrl.Path = "largecode"
+	//funcUrl.Host = "service-5lyxjwvb-1256474564.sh.apigw.tencentcs.com"
+	//funcUrl.Path = "largecode"
+	funcUrl.Host = "service-cfufc6h3-1256474564.sh.apigw.tencentcs.com"
+	funcUrl.Path = "vpc"
 	req, err := http.NewRequest("GET", funcUrl.String(), ioutil.NopCloser(bytes.NewReader(*body)))
 
 	if err != nil {
