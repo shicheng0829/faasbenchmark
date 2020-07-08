@@ -33,7 +33,6 @@ func newStacks(provider provider.FaasProvider, arsenalPath string) (*Stacks, err
 	stacks := &Stacks{
 		Stacks: make(map[string]*Stack),
 	}
-
 	for _, stackPath := range stackPaths {
 		stack, err := newStack(provider, stackPath)
 

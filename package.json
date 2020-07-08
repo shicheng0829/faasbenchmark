@@ -20,6 +20,7 @@
     "serverless-azure-functions": "^0.7.0",
     "serverless-gbucket-remover": "git+https://github.com/Nuweba/serverless-gbucket-remover.git",
     "serverless-google-cloudfunctions": "^2.3.2",
-    "serverless-s3-remover": "^0.6.0"
+    "serverless-s3-remover": "^0.6.0",
+    "serverless-tencent-scf": "^0.1.36"
   }
 }

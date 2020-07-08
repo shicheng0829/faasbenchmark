@@ -3,7 +3,7 @@ module github.com/nuweba/faasbenchmark
 go 1.12
 
 require (
-	github.com/aws/aws-lambda-go v1.13.3 // indirect
+	github.com/aliyun/fc-go-sdk v0.0.0-20200619091938-0882be48e49f
 	github.com/aws/aws-sdk-go v1.19.23
 	github.com/cjbassi/drawille-go v0.1.0 // indirect
 	github.com/disintegration/gift v1.2.0
@@ -22,6 +22,8 @@ require (
 	github.com/pkg/errors v0.8.1
 	github.com/spf13/cobra v0.0.3
 	github.com/spf13/pflag v1.0.3 // indirect
+	github.com/stretchr/testify v1.4.0 // indirect
+	github.com/tencentyun/scf-go-lib v0.0.0-20200624065115-ba679e2ec9c9
 	go.uber.org/atomic v1.4.0 // indirect
 	go.uber.org/multierr v1.1.0 // indirect
 	go.uber.org/zap v1.10.0
