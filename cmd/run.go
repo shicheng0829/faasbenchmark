@@ -20,6 +20,7 @@ import (
 	"runtime"
 	"strings"
 	"syscall"
+	"time"
 )
 
 const (
@@ -214,6 +215,7 @@ func runOneTest(gConfig *config.Global, testId string) error {
 
 	gConfig.Logger.Debug("test is done", zap.String("name", test.Id))
 
+	time.Sleep(time.Duration(5)*time.Minute)
 	return err
 }
 

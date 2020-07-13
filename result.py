@@ -3,6 +3,9 @@ import json
 import csv
 import oss2
 import pandas as pd
+import time
+
+date = time.strftime("%Y_%m_%d", time.localtime())
 
 
 def getpath(dir):
@@ -68,6 +71,8 @@ for file in files:
 with open("result.html","w") as htmlfile:
     title = ["testNmae", "invocationOverhead", "duration", "responseTime", "reusedRate", "failedRate"]
     htmlfile.write(convertToHtml(result, title))
+
+
 access_key_id = os.getenv("ACCESS_KEY_ID")
 access_key_secret = os.getenv("ACCESS_KEY_SECRET")
 oss_endpoint = os.getenv("OSS_ENDPOINT")
@@ -75,17 +80,21 @@ bucket_name = os.getenv("BUCKET_NAME")
 
 auth = oss2.Auth(access_key_id, access_key_secret)
 bucket = oss2.Bucket(auth, oss_endpoint, bucket_name)
+
+bucket.get_object_to_file("index.html", "index.html")
+with open("index.html","a") as htmlfile:
+    htmlfile.write(f'<a href="http://faasbenchmark.functioncompute.com/{date}/result.html">{date} faasbenchmark result<br></a>')
+
 # write history result csv
-bucket.put_object_from_file(os.path.join(path, "result.csv"), "result.csv")
+bucket.put_object_from_file(os.path.join(date, "result.csv"), "result.csv")
 # write history log file
-bucket.put_object_from_file(os.path.join(path, "log"), "log")
+bucket.put_object_from_file(os.path.join(date, "log"), "log")
 # update current result html
-bucket.put_object_from_file("result.html", "result.html")
-# update current result csv
-bucket.put_object_from_file("result.csv", "result.csv")
+bucket.put_object_from_file(os.path.join(date, "result.html"), "result.html")
 # update current result log
-bucket.put_object_from_file("log", "log")
+bucket.put_object_from_file("index.html", "index.html")
 
 os.remove("./result.csv")
 os.remove("./log")
+os.remove("./index.html")
 os.remove("./result.html")
