@@ -31,9 +31,9 @@ func checkDeps() bool {
 }
 
 func main() {
-	if !checkDeps() {
-		fmt.Println("please install all missing dependencies")
-		return
-	}
+	//if !checkDeps() {
+	//	fmt.Println("please install all missing dependencies")
+	//	return
+	//}
 	cmd.Execute()
 }
