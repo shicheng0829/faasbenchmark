@@ -155,6 +155,7 @@ func RunAllTests(gConfig *config.Global) (err error) {
 			gConfig.Logger.Error("error running test", zap.Error(err), zap.String("test", id))
 			err = testErr
 		}
+		time.Sleep(time.Duration(5)*time.Minute)
 	}
 	return err
 }
@@ -215,7 +216,6 @@ func runOneTest(gConfig *config.Global, testId string) error {
 
 	gConfig.Logger.Debug("test is done", zap.String("name", test.Id))
 
-	time.Sleep(time.Duration(5)*time.Minute)
 	return err
 }
 
