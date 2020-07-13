@@ -2,6 +2,8 @@ import os
 import json
 import csv
 import oss2
+import pandas as pd
+
 
 def getpath(dir):
     files = os.listdir(dir)
@@ -10,11 +12,22 @@ def getpath(dir):
         if "results" in files[i]:
             return files[i]
 
+def convertToHtml(result,title):
+    df = pd.DataFrame(columns=title)
+    for row in result:
+        df = df.append(pd.DataFrame([row], columns=title))
+    return df.to_html(index=False)
+
+
+
+
 path = getpath("./")
 files = os.listdir(path)
-with open("result.csv", "a") as csvfile:
+result = []
+with open("result.csv", "w") as csvfile:
     writer = csv.writer(csvfile)
     writer.writerow(["testNmae", "invocationOverhead", "duration", "responseTime", "reusedRate", "failedRate"])
+
 
 for file in files:
     with open(os.path.join(path, file, "aliyun", "result.json")) as load_f:
@@ -50,12 +63,29 @@ for file in files:
         with open("result.csv", "a") as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow([file, invocationOverhead, duration, responseTime, reusedRate, failedRate])
+            result.append([file, invocationOverhead, duration, responseTime, reusedRate, failedRate])
 
+with open("result.html","w") as htmlfile:
+    title = ["testNmae", "invocationOverhead", "duration", "responseTime", "reusedRate", "failedRate"]
+    htmlfile.write(convertToHtml(result, title))
 access_key_id = os.getenv("ACCESS_KEY_ID")
 access_key_secret = os.getenv("ACCESS_KEY_SECRET")
 oss_endpoint = os.getenv("OSS_ENDPOINT")
 bucket_name = os.getenv("BUCKET_NAME")
+
 auth = oss2.Auth(access_key_id, access_key_secret)
 bucket = oss2.Bucket(auth, oss_endpoint, bucket_name)
+# write history result csv
 bucket.put_object_from_file(os.path.join(path, "result.csv"), "result.csv")
+# write history log file
+bucket.put_object_from_file(os.path.join(path, "log"), "log")
+# update current result html
+bucket.put_object_from_file("result.html", "result.html")
+# update current result csv
+bucket.put_object_from_file("result.csv", "result.csv")
+# update current result log
+bucket.put_object_from_file("log", "log")
+
 os.remove("./result.csv")
+os.remove("./log")
+os.remove("./result.html")
