@@ -18,8 +18,6 @@ def convertToHtml(result,title):
     return df.to_html(index=False)
 
 
-
-
 path = getpath("./")
 files = os.listdir(path)
 result = []
@@ -80,20 +78,29 @@ bucket_name = os.getenv("BUCKET_NAME")
 auth = oss2.Auth(access_key_id, access_key_secret)
 bucket = oss2.Bucket(auth, oss_endpoint, bucket_name)
 
+# write history result csv
+result_csv_path = os.path.join(path, "result.csv")
+if os.path.exists(result_csv_path):
+    bucket.put_object_from_file(result_csv_path, "result.csv")
+# write history log file
+log_file_path = os.path.join(path, "log")
+if os.path.exists(log_file_path):
+    bucket.put_object_from_file(log_file_path, "log")
+# write current result html
+result_html_path = os.path.join(path, "result.html")
+if os.path.exists(result_html_path):
+    bucket.put_object_from_file(result_html_path, "result.html")
+# update current index html
 bucket.get_object_to_file("index.html", "index.html")
 with open("index.html","a") as htmlfile:
     htmlfile.write(f'<a href="http://faasbenchmark.functioncompute.com/{path}/result.html">{path} faasbenchmark result<br></a>')
-
-# write history result csv
-bucket.put_object_from_file(os.path.join(path, "result.csv"), "result.csv")
-# write history log file
-bucket.put_object_from_file(os.path.join(path, "log"), "log")
-# update current result html
-bucket.put_object_from_file(os.path.join(path, "result.html"), "result.html")
-# update current result log
 bucket.put_object_from_file("index.html", "index.html")
 
-os.remove("./result.csv")
-os.remove("./log")
-os.remove("./index.html")
-os.remove("./result.html")
+if os.path.exists("./result.csv"):
+    os.remove("./result.csv")
+if os.path.exists("./log"):
+    os.remove("./log")
+if os.path.exists("./index.html"):
+    os.remove("./index.html")
+if os.path.exists("./result.html"):
+    os.remove("./result.html")
