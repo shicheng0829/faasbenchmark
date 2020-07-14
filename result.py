@@ -3,10 +3,6 @@ import json
 import csv
 import oss2
 import pandas as pd
-import time
-
-date = time.strftime("%Y_%m_%d", time.localtime())
-
 
 def getpath(dir):
     files = os.listdir(dir)
@@ -86,14 +82,14 @@ bucket = oss2.Bucket(auth, oss_endpoint, bucket_name)
 
 bucket.get_object_to_file("index.html", "index.html")
 with open("index.html","a") as htmlfile:
-    htmlfile.write(f'<a href="http://faasbenchmark.functioncompute.com/{date}/result.html">{date} faasbenchmark result<br></a>')
+    htmlfile.write(f'<a href="http://faasbenchmark.functioncompute.com/{path}/result.html">{path} faasbenchmark result<br></a>')
 
 # write history result csv
-bucket.put_object_from_file(os.path.join(date, "result.csv"), "result.csv")
+bucket.put_object_from_file(os.path.join(path, "result.csv"), "result.csv")
 # write history log file
-bucket.put_object_from_file(os.path.join(date, "log"), "log")
+bucket.put_object_from_file(os.path.join(path, "log"), "log")
 # update current result html
-bucket.put_object_from_file(os.path.join(date, "result.html"), "result.html")
+bucket.put_object_from_file(os.path.join(path, "result.html"), "result.html")
 # update current result log
 bucket.put_object_from_file("index.html", "index.html")
 
