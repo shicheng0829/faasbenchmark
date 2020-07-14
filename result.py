@@ -79,17 +79,14 @@ auth = oss2.Auth(access_key_id, access_key_secret)
 bucket = oss2.Bucket(auth, oss_endpoint, bucket_name)
 
 # write history result csv
-result_csv_path = os.path.join(path, "result.csv")
-if os.path.exists(result_csv_path):
-    bucket.put_object_from_file(result_csv_path, "result.csv")
+if os.path.exists("./result.csv"):
+    bucket.put_object_from_file(os.path.join(path, "result.csv"), "result.csv")
 # write history log file
-log_file_path = os.path.join(path, "log")
-if os.path.exists(log_file_path):
-    bucket.put_object_from_file(log_file_path, "log")
+if os.path.exists("./log"):
+    bucket.put_object_from_file(os.path.join(path, "log"), "log")
 # write current result html
-result_html_path = os.path.join(path, "result.html")
-if os.path.exists(result_html_path):
-    bucket.put_object_from_file(result_html_path, "result.html")
+if os.path.exists("./result.html"):
+    bucket.put_object_from_file(os.path.join(path, "result.html"), "result.html")
 # update current index html
 bucket.get_object_to_file("index.html", "index.html")
 with open("index.html","a") as htmlfile:
