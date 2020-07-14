@@ -33,7 +33,10 @@ with open("result.csv", "w") as csvfile:
 
 
 for file in files:
-    with open(os.path.join(path, file, "aliyun", "result.json")) as load_f:
+    result_path = os.path.join(path, file, "aliyun", "result.json")
+    if not os.path.exists(result_path):
+        continue
+    with open(result_path) as load_f:
         load_dict = json.load(load_f)
         list = load_dict["functions"][0]['results']
         sumofInvocationOverhead = 0
