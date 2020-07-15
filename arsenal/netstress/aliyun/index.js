@@ -16,6 +16,7 @@ exports.initializer = (context, callback) => {
 };
 */
 async function networkIntensive(level) {
+    // console.log("start download")
     const writable = fs.createWriteStream('/dev/null');
     await new Promise((resolve) => http.get({
         host: `www.ovh.net`,
@@ -25,6 +26,7 @@ async function networkIntensive(level) {
         var download = res.pipe(writable);
         download.on('close', () => resolve(res));
     }));
+    // console.log("finish download")
 }
 
 
@@ -51,8 +53,8 @@ function getParameters(event) {
     return getLevel(event);
 }
 
-function runTest(intensityLevel){
-    networkIntensive(intensityLevel);
+async function runTest(intensityLevel){
+    await networkIntensive(intensityLevel);
 }
 
 
@@ -60,7 +62,7 @@ function runTest(intensityLevel){
 exports.handler = async (req, resp, context) => {
     var startTime = process.hrtime();
     // console.log(req.queries['level'])
-    runTest(req.queries['level']);
+    await runTest(req.queries['level']);
     var reused = isWarm();
     var duration = getDuration(startTime);
     resp.send(JSON.stringify({
