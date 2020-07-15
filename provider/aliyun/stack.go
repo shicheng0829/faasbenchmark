@@ -38,7 +38,7 @@ func (s Stack) DeployStack() error {
 		WithDescription("go sdk test function").
 		WithHandler("index.handler").WithRuntime("nodejs12").
 		WithCode(fc.NewCode().WithFiles(path.Join(s.stackPath,"aliyun" ,"index.js"))).
-		WithTimeout(5).WithMemorySize(512)
+		WithTimeout(120).WithMemorySize(512)
 	createFunctionOutput, err := s.client.CreateFunction(createFunctionInput1)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
