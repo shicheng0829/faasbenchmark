@@ -146,8 +146,9 @@ func ReportRequestResults(funcConfig *config.HttpFunction, resultCh chan *engine
 				funcConfig.Logger.Error("raw result writer", zap.Error(err))
 			}
 		}
-
 		funcConfig.Logger.Debug("got new request result", zap.Uint64("id", result.Id))
+		fmt.Println(result.Err)
+		fmt.Println(err)
 		funcOutput, err := RequestBodyUnmarshal([]byte(result.Body))
 		if err != nil {
 			errorReporter.errorReporter(result.Id, err, "request body unmarshal", result.Body)
