@@ -1,4 +1,4 @@
-service: cpustress
+service: netstress
 
 #org: orgDemo
 #app: appDemo
