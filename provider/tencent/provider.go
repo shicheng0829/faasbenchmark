@@ -87,8 +87,10 @@ func (tencent *Tencent) buildGFuncInvokeReq(funcName string, projectId string, q
 	//funcUrl.Path = "sleep"
 	//funcUrl.Host = "service-5lyxjwvb-1256474564.sh.apigw.tencentcs.com"
 	//funcUrl.Path = "largecode"
-	funcUrl.Host = "service-mi5kwyxz-1256474564.sh.apigw.tencentcs.com"
-	funcUrl.Path = "netstress"
+	//funcUrl.Host = "service-mi5kwyxz-1256474564.sh.apigw.tencentcs.com"
+	//funcUrl.Path = "netstress"
+	funcUrl.Host = "service-cxvb2r3h-1256474564.sh.apigw.tencentcs.com"
+	funcUrl.Path = "iostresslvl1"
 	req, err := http.NewRequest("GET", funcUrl.String(), ioutil.NopCloser(bytes.NewReader(*body)))
 
 	if err != nil {
